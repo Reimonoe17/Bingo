@@ -10,34 +10,37 @@
         Dim collumn As Integer
         Dim letter As String
         Dim number As Integer
+        Dim copyCat As Boolean = False
 
-        For i = 1 To 10
+        For i = 1 To 20
 
-            row = Roll(4)
+            Do
+                row = Roll(5)
 
-            Select Case row
-                Case 0
-                    collumn = Roll(14)
-                    letter = "B"
-                    number = collumn
-                Case 1
-                    collumn = Roll(14)
-                    letter = "I"
-                    number = collumn + 15
-                Case 2
-                    collumn = Roll(14)
-                    letter = "N"
-                    number = collumn + 30
-                Case 3
-                    collumn = Roll(14)
-                    letter = "G"
-                    number = collumn + 45
-                Case 4
-                    collumn = Roll(14)
-                    letter = "O"
-                    number = collumn + 60
-            End Select
+                Select Case row
+                    Case 0
+                        collumn = Roll(15)
+                        letter = "B"
+                        number = collumn
+                    Case 1
+                        collumn = Roll(15)
+                        letter = "I"
+                        number = collumn + 15
+                    Case 2
+                        collumn = Roll(15)
+                        letter = "N"
+                        number = collumn + 30
+                    Case 3
+                        collumn = Roll(15)
+                        letter = "G"
+                        number = collumn + 45
+                    Case 4
+                        collumn = Roll(15)
+                        letter = "O"
+                        number = collumn + 60
+                End Select
 
+            Loop Until bingoCage(row, collumn) = False
             bingoCage(row, collumn) = True
 
 
