@@ -42,20 +42,47 @@
 
 
         Next
-        Console.WriteLine($"{letter} {number}")
 
-        For i = 0 To 4
-            For j = 0 To 14
-                Console.Write($"{(bingoCage(i, j))}   ")
-            Next
-            Console.WriteLine("")
-        Next
+        DisplayBingoCage(bingoCage)
+
+        'For i = 0 To 4
+        '    For j = 0 To 14
+        '        Console.Write($"{(bingoCage(i, j))}   ")
+        '    Next
+        '    Console.WriteLine("")
+        'Next
 
         Console.ReadLine()
     End Sub
     Function Roll(value As Integer) As Integer
+        Randomize(DateTime.Now.Millisecond)
         Dim number As Integer
         number = CInt(Int((value * Rnd())))
         Return number
     End Function
+
+    Sub DisplayBingoCage(ByRef bingoCage(,) As Boolean)
+        Dim header() As String = {"B", "I", "N", "G", "O"}
+        Dim columnWidth As Integer = 3
+        Dim columnData As String
+
+        For row = 0 To bingoCage.GetLength(1)
+            For column = 0 To bingoCage.GetLength(0) - 1
+                Select Case row
+                    Case 0 'first row is column headers
+                        columnData = header(column).PadLeft(columnWidth)
+                    Case Else
+                        If Not bingoCage(column, row - 1) Then 'mark if ball has been drawn
+                            columnData = "  "
+                        Else 'show number if ball hasn't been drawn
+                            columnData = CStr(((column) * bingoCage.GetLength(1)) + row)
+                        End If
+                End Select
+                Console.Write(columnData.PadLeft(columnWidth) & " |")
+            Next
+            Console.WriteLine()
+            Console.WriteLine(StrDup(25, "-"))
+        Next
+
+    End Sub
 End Module
